@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/layout.xhtml">
+    <ui:define name="css">
+<style type="text/css">
+.padre {
+  display: flex;
+  justify-content: center;
+}
+
+.mvc-text-align-center {
+	text-align: center;
+}
+
+.ui-panelgrid-content {
+	align-items: center;
+}
+
+
+
+.mvc-text-align-left {
+	text-align: left
+}
+
+ </style>
+    </ui:define>
+	<ui:define name="title">
+		<title>file submission</title>
+	</ui:define>
+
+	<ui:define name="header">
+		<h1>BackPosting-file submission</h1>
+	</ui:define>
+<ui:define name="content">
+	<div class="padre" >
+    <h:form>
+        <h:panelGrid id="grid" cellpadding="7" columns="2" styleClass="mvc-text-align-left">
+         
+            <p:outputLabel for="code" value="Company" />
+                                <p:selectOneMenu id="code" value="#{InputDataControllerBean.vcountry}" filter="true" filterMatchMode="startsWith">
+                                    <f:selectItems value="#{InputDataControllerBean.lstData}" var="country" itemLabel="#{country.code}" itemValue="#{country.code}" />
+                                </p:selectOneMenu>
+                                
+            <p:outputLabel for="vyear" value="Enter Year :"/>
+                            <h:inputText id="vyear" required="true"  size="4" maxlength="4" value="#{InputDataControllerBean.zyear}" converter="javax.faces.Integer" >
+                                
+                            </h:inputText>  
+                                 
+            <p:outputLabel for="vmonth" value=" Select Period:" />
+                            <h:selectOneMenu id="vmonth" value="#{InputDataControllerBean.zmonth}">
+                                <f:selectItem itemLabel="JAN" itemValue="1" />
+                                <f:selectItem itemLabel="FEB" itemValue="2" />
+                                <f:selectItem itemLabel="MAR" itemValue="3" />
+                                <f:selectItem itemLabel="APR" itemValue="4" />
+                                <f:selectItem itemLabel="MAY" itemValue="5" />
+                                <f:selectItem itemLabel="JUN" itemValue="6" />
+                                <f:selectItem itemLabel="JUL" itemValue="7" />
+                                <f:selectItem itemLabel="AUG" itemValue="8" />
+                                <f:selectItem itemLabel="SEP" itemValue="9" />
+                                <f:selectItem itemLabel="OCT" itemValue="10" />
+                                <f:selectItem itemLabel="NOV" itemValue="11" />
+                                <f:selectItem itemLabel="DEC" itemValue="12" />
+                            </h:selectOneMenu>
+                         
+        </h:panelGrid>
+
+         <p:commandButton value="Submit" id="btnThis" process="@form"  update="msgs" 
+         action="#{InputDataControllerBean.submit}" styleClass="p-mr-2" resetValues="true">
+         
+         </p:commandButton>
+        
+        <p:messages id="msgs" closable="true"  />
+        
+   
+ </h:form>
+</div>
+</ui:define>
+</ui:composition>
