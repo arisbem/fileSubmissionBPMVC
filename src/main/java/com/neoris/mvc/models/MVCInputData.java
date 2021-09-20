@@ -13,9 +13,11 @@ import org.hibernate.annotations.Subselect;
 @Entity
 @Subselect(value = "select code,name " + 
 		"from SCHOPERATIONS.TCFGACCOUNTINGCOMPANY " + 
-		"where countryid in (16,237,238,239)")
+		"where countryid in  (16,286, 287,288)")
 public class MVCInputData implements Serializable {
 
+	//TEST=> "where countryid in (16,237,238,239)"
+	//PROD => "where countryid in (16,286, 287,288)")
 	private static final long serialVersionUID = 1717875553545677091L;
 	
 	@Id

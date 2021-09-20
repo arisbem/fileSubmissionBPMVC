@@ -20,6 +20,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +28,8 @@ import org.springframework.web.client.RestTemplate;
 import com.neoris.mvc.models.MVCInputData;
 import com.neoris.mvc.services.IMVCInputDataServices;
 import com.neoris.mvc.utils.ViewScope;
+
+import sun.net.www.http.HttpClient;
 
 
 @Controller(value = "InputDataControllerBean")
@@ -141,8 +144,11 @@ private final static Logger LOG = LoggerFactory.getLogger(MVCInputDataController
 		 try {
 			 
 			 headers.add("Authorization", "Basic " + base64Creds);
+			 
+			 //space between CompanyCode= and country variable
 			 String url =this.iphost+"?CompanyCode= "+this.vcountry+"&Year="+this.zyear+"&Month="+this.zmonth+"&GroupLedger=Z1" ;
 			 LOG.info("url = {}", url);
+			
 			 request = new HttpEntity<String>(headers);
 			 response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
 			
@@ -150,7 +156,7 @@ private final static Logger LOG = LoggerFactory.getLogger(MVCInputDataController
 			LOG.info(" getStatusCodeValue = {}" , response.getStatusCodeValue());
 			
 			
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Succefull! "));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful! "));
 			 
 			 
 		 } catch (RestClientException e) {
